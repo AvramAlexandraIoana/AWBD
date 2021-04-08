@@ -14,7 +14,7 @@ public class Country {
     private Long id;
     private String countryName;
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country",  cascade = CascadeType.ALL)
     private List<Location> locationList;
 
 

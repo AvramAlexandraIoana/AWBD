@@ -19,10 +19,11 @@ public class Location {
     private Country country;
 
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location",  cascade = CascadeType.ALL)
     private List<Agency> agencyList;
 
-    @OneToOne
+    @OneToOne(mappedBy = "location",
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private Info info;
 
 }

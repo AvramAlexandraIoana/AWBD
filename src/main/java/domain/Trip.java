@@ -19,7 +19,8 @@ public class Trip {
     @JoinColumn(name="agency_id")
     private Agency agency;
 
-    @ManyToMany
+    @ManyToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "purchase",
             joinColumns =@JoinColumn(name="trip_id",referencedColumnName =
                     "id"),

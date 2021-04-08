@@ -18,7 +18,7 @@ public class Agency {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany(mappedBy = "agency")
+    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
     private List<Trip> tripList;
 
 }
