@@ -15,7 +15,6 @@ public class Tourist {
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
-    private Byte[] imagine;
     private String description;
 
     @ManyToMany(mappedBy = "tourists")
