@@ -1,6 +1,7 @@
 package com.awbd.proiect;
 
 import domain.Agency;
+import domain.Info;
 import domain.Location;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
@@ -27,15 +28,14 @@ public class CascadeTypesTest {
     @Autowired
     private EntityManager entityManager;
 
-    @Ignore
     @Test
     public void saveLocation() {
         Location location = new Location();
-        location.setCity("Bucuresti");
-        location.setStreetAddress("Stefan Cel Mare");
+        location.setCity("Targu Jiu");
+        location.setStreetAddress("Mioritei");
 
         Agency agency = new Agency();
-        agency.setName("Tarom");
+        agency.setName("SCL.");
         agency.setLocation(location);
 
         location.setAgencyList(Arrays.asList(agency));
@@ -43,6 +43,28 @@ public class CascadeTypesTest {
         entityManager.flush();
         entityManager.clear();
     }
+
+    @Test
+    public void saveLocationWithInfo() {
+        Info info = new Info();
+        info.setImage(null);
+        info.setDescription("mama");
+
+        Location location = new Location();
+        location.setCity("Targu Jiu");
+        location.setStreetAddress("Mioritei");
+
+        info.setLocation(location);
+
+        location.setInfo(info);
+
+        entityManager.persist(location);
+        entityManager.flush();
+        entityManager.clear();
+    }
+
+
+
 
     @Test
     public void updateLocation(){

@@ -22,8 +22,7 @@ public class Location {
     @OneToMany(mappedBy = "location",  cascade = CascadeType.ALL)
     private List<Agency> agencyList;
 
-    @OneToOne(mappedBy = "location",
-            cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Info info;
 
 }

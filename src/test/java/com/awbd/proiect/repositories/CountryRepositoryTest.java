@@ -27,4 +27,12 @@ public class CountryRepositoryTest {
         countryRepository.save(country);
     }
 
+
+    @Test
+    public void deleteCountry() {
+        int id  = 3;
+        long id1 = id;
+        countryRepository.deleteById(id1);
+    }
+
 }
