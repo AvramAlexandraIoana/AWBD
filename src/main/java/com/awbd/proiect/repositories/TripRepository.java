@@ -1,4 +1,4 @@
-package repositories;
+package com.awbd.proiect.repositories;
 
 import domain.Trip;
 import org.springframework.data.repository.PagingAndSortingRepository;

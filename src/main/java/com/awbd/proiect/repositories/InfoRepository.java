@@ -1,6 +1,5 @@
-package repositories;
+package com.awbd.proiect.repositories;
 
-import domain.Country;
 import domain.Info;
 import org.springframework.data.jpa.repository.JpaRepository;
 

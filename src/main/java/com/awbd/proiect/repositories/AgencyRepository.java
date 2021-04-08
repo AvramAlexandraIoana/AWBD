@@ -1,4 +1,4 @@
-package repositories;
+package com.awbd.proiect.repositories;
 
 import domain.Agency;
 import org.springframework.data.repository.CrudRepository;
