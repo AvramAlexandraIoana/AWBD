@@ -1,6 +1,7 @@
 package com.awbd.proiect.repositories;
 
-import domain.Country;
+import com.awbd.proiect.domain.Country;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,18 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace =
         AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("mysql")
 @Rollback(false)
+@Slf4j
 public class CountryRepositoryTest {
     @Autowired
     private CountryRepository countryRepository;
@@ -27,6 +34,34 @@ public class CountryRepositoryTest {
         countryRepository.save(country);
     }
 
+    @Test
+    public void findByCountryName() {
+       List<Country> countryList =
+                countryRepository.findByCountryNameLike("%om%");
+       assertFalse(countryList.isEmpty());
+       log.info("find by country name like ...");
+       countryList.forEach(country -> {
+           log.info(country.getCountryName());
+       });
+
+    }
+
+    @Test
+    public void findByIds() {
+        List<Country> countryList =
+                countryRepository.findByIdIn(Arrays.asList(1L, 2L));
+        assertFalse(countryList.isEmpty());
+        log.info("find by ids ... ");
+        countryList.forEach(country -> {
+            log.info(country.getCountryName());
+        });
+
+    }
+
+
+
+
+
 
     @Test
     public void deleteCountry() {
@@ -34,5 +69,8 @@ public class CountryRepositoryTest {
         long id1 = id;
         countryRepository.deleteById(id1);
     }
+
+
+
 
 }

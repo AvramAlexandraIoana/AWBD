@@ -1,9 +1,8 @@
 package com.awbd.proiect;
 
-import domain.Agency;
-import domain.Info;
-import domain.Location;
-import org.junit.Ignore;
+import com.awbd.proiect.domain.Agency;
+import com.awbd.proiect.domain.Info;
+import com.awbd.proiect.domain.Location;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -48,10 +47,10 @@ public class CascadeTypesTest {
     public void saveLocationWithInfo() {
         Info info = new Info();
         info.setImage(null);
-        info.setDescription("mama");
+        info.setDescription("test");
 
         Location location = new Location();
-        location.setCity("Targu Jiu");
+        location.setCity("Buc Jiu");
         location.setStreetAddress("Mioritei");
 
         info.setLocation(location);
