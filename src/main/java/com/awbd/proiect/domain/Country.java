@@ -1,6 +1,7 @@
 package com.awbd.proiect.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,9 +16,8 @@ public class Country {
     private String countryName;
 
     @OneToMany(mappedBy = "country",  cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Location> locationList;
-
-
 
 
 }

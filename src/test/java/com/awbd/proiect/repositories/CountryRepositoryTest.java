@@ -1,6 +1,7 @@
 package com.awbd.proiect.repositories;
 
 import com.awbd.proiect.domain.Country;
+import com.awbd.proiect.domain.Location;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +32,8 @@ public class CountryRepositoryTest {
     public void addCountry() {
         Country country = new Country();
         country.setCountryName("Romania");
+
+        Location location = new Location();
         countryRepository.save(country);
     }
 

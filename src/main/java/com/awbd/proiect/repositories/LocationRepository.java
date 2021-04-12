@@ -12,7 +12,7 @@ public interface LocationRepository extends PagingAndSortingRepository<Location,
     @Query("select l from Location l where l.country.id = ?1")
     List<Location> findByCountry(Long countryId);
 
-    @Query("select l from Location l where l.country.countryName = :city")
-    List<Location> findByCountryName(@Param("countryName") String countryName);
+//    @Query("select l from Location l where l.country.countryName = :city")
+//    List<Location> findByCountryName(@Param("countryName") String countryName);
 
 }
