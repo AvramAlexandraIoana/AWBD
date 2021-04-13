@@ -1,5 +1,6 @@
 package com.awbd.proiect.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,7 +19,8 @@ public class Agency {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Trip> tripList;
 
 }

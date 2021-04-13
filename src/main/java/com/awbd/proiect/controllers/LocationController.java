@@ -1,5 +1,6 @@
 package com.awbd.proiect.controllers;
 
+import com.awbd.proiect.domain.Country;
 import com.awbd.proiect.domain.Location;
 import com.awbd.proiect.services.LocationService;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class LocationController {
                 .body(locationService.findAll());
     }
 
-    @PostMapping("/save")
+    @PostMapping()
     public
     ResponseEntity<Location> save(@RequestBody Location location) {
         Location savedLocation = locationService.save(location);
@@ -39,5 +40,22 @@ public class LocationController {
                 .build(savedLocation.getId()))
                 .body(savedLocation);
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Location> getById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(locationService.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Location> update(@RequestBody Location location) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(locationService.update(location));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable Long id) {
+        locationService.deleteById(id);
     }
 }

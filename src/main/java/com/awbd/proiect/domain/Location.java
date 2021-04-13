@@ -18,14 +18,19 @@ public class Location {
 
     @ManyToOne
     @JoinColumn(name = "country_id")
-    @JsonBackReference
+//    @JsonBackReference
     private Country country;
 
 
-    @OneToMany(mappedBy = "location",  cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "location",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Agency> agencyList;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Info info;
+
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Trip> tripList;
 
 }

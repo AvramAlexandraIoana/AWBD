@@ -19,6 +19,11 @@ public class Trip {
     @JoinColumn(name="agency_id")
     private Agency agency;
 
+
+    @ManyToOne
+    @JoinColumn(name="location_id")
+    private Location location;
+
     @ManyToMany(
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "purchase",

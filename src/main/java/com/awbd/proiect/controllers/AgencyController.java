@@ -1,6 +1,7 @@
 package com.awbd.proiect.controllers;
 
 import com.awbd.proiect.domain.Agency;
+import com.awbd.proiect.domain.Country;
 import com.awbd.proiect.services.AgencyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class AgencyController {
                 .body(agencyService.findAll());
     }
 
-    @PostMapping("/save")
+    @PostMapping()
     public
     ResponseEntity<Agency> save(@RequestBody  Agency agency) {
         Agency savedAgency = agencyService.save(agency);
@@ -34,10 +35,27 @@ public class AgencyController {
                 fromHttpUrl(ServletUriComponentsBuilder.
                         fromCurrentRequestUri().
                         toUriString())
-                .replacePath("locations/" + savedAgency.getId())
+                .replacePath("agency/" + savedAgency.getId())
                 .build(savedAgency.getId()))
                 .body(savedAgency);
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Agency> getById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(agencyService.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Agency> update(@RequestBody Agency agency) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(agencyService.update(agency));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable Long id) {
+        agencyService.deleteById(id);
     }
 
 
