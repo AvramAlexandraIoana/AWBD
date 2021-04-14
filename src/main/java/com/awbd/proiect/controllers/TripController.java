@@ -1,8 +1,9 @@
 package com.awbd.proiect.controllers;
 
-import com.awbd.proiect.domain.Country;
 import com.awbd.proiect.domain.Location;
+import com.awbd.proiect.domain.Trip;
 import com.awbd.proiect.services.LocationService;
+import com.awbd.proiect.services.TripService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,50 +13,52 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/location")
-public class LocationController {
-    private LocationService locationService;
+@RequestMapping("/trip")
+public class TripController {
+    private TripService tripService;
 
-    public LocationController(LocationService locationService) {
-        this.locationService = locationService;
+    public TripController(TripService tripService) {
+        this.tripService = tripService;
     }
 
 
     @GetMapping("/list")
     public
-    ResponseEntity<List<Location>> get() {
+    ResponseEntity<List<Trip>> get() {
         return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body(locationService.findAll());
+                .body(tripService.findAll());
     }
 
     @PostMapping()
     public
-    ResponseEntity<Location> save(@RequestBody Location location) {
-        Location savedLocation = locationService.save(location);
+    ResponseEntity<Trip> save(@RequestBody Trip trip) {
+        Trip savedTrip = tripService.save(trip);
         return ResponseEntity.created(UriComponentsBuilder.
                 fromHttpUrl(ServletUriComponentsBuilder.
                         fromCurrentRequestUri().
                         toUriString())
-                .replacePath("location/" + savedLocation.getId())
-                .build(savedLocation.getId()))
-                .body(savedLocation);
+                .replacePath("trip/" + savedTrip.getId())
+                .build(savedTrip.getId()))
+                .body(savedTrip);
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Location> getById(@PathVariable Long id) {
+    public ResponseEntity<Trip> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(locationService.findById(id));
+                .body(tripService.findById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Location> update(@RequestBody Location location) {
+    public ResponseEntity<Trip> update(@RequestBody Trip trip) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(locationService.update(location));
+                .body(tripService.update(trip));
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Long id) {
-        locationService.deleteById(id);
+        tripService.deleteById(id);
     }
+
+
 }

@@ -29,7 +29,7 @@ public class CountryServiceImpl  implements  CountryService{
     List<Country> findAll(){
         List<Country> countryList = new LinkedList<>();
         countryRepository.findAll().iterator().forEachRemaining(countryList::add);
-        log.info("Find all countries ...");
+        log.info("Find all countries ...", countryList);
         return countryList;
     }
 
@@ -40,14 +40,14 @@ public class CountryServiceImpl  implements  CountryService{
         if (!productOptional.isPresent()) {
             throw new RuntimeException("Country not found!");
         }
-        log.info("Find by id ", l);
+        log.info("Find by id ...", productOptional.get());
         return productOptional.get();
     }
 
     @Override
     public Country save(Country country) {
         Country savedCountry = countryRepository.save(country);
-        log.info("Saved country ", savedCountry);
+        log.info("Saved country ...", savedCountry);
         return savedCountry;
     }
 
@@ -59,7 +59,7 @@ public class CountryServiceImpl  implements  CountryService{
             throw new RuntimeException("Country not found!");
         }
         Country updateCountry = countryRepository.save(country);
-        log.info("Update country ", updateCountry);
+        log.info("Update country ...", updateCountry);
         return updateCountry;
     }
 

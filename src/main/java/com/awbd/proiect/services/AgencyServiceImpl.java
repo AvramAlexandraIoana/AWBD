@@ -26,7 +26,7 @@ public class AgencyServiceImpl implements AgencyService {
     public List<Agency> findAll(){
         List<Agency> agencyList = new LinkedList<>();
         agencyRepository.findAll().iterator().forEachRemaining(agencyList::add);
-        log.info("Find all", agencyList);
+        log.info("Find all ...", agencyList);
         return agencyList;
     }
 
@@ -37,14 +37,14 @@ public class AgencyServiceImpl implements AgencyService {
         if (!agencyOptional.isPresent()) {
             throw new RuntimeException("Agency not found!");
         }
-        log.info("Find by id ", agencyOptional.get());
+        log.info("Find by id ...", agencyOptional.get());
         return agencyOptional.get();
     }
 
     @Override
     public Agency save(Agency agency) {
         Agency savedAgency = agencyRepository.save(agency);
-        log.info("Saved agency ", savedAgency);
+        log.info("Saved agency ...", savedAgency);
         return savedAgency;
     }
 
@@ -57,7 +57,7 @@ public class AgencyServiceImpl implements AgencyService {
             throw new RuntimeException("Agency not found!");
         }
         Agency updateAgency = agencyRepository.save(agency);
-        log.info("Update agency ", updateAgency);
+        log.info("Update agency ...", updateAgency);
         return updateAgency;
     }
 

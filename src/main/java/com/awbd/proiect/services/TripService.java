@@ -1,0 +1,14 @@
+package com.awbd.proiect.services;
+
+
+import com.awbd.proiect.domain.Trip;
+
+import java.util.List;
+
+public interface TripService {
+    List<Trip> findAll();
+    Trip findById(Long l);
+    Trip save(Trip trip);
+    Trip update(Trip trip);
+    void deleteById(Long id);
+}

@@ -30,7 +30,7 @@ public  class LocationServiceImpl implements  LocationService{
     List<Location> findAll(){
         List<Location> locations = new LinkedList<>();
         locationRepository.findAll().iterator().forEachRemaining(locations::add);
-        log.info("Find all locations ...");
+        log.info("Find all locations ...", locations);
         return locations;
     }
 
@@ -41,14 +41,14 @@ public  class LocationServiceImpl implements  LocationService{
         if (!locationOptional.isPresent()) {
             throw new RuntimeException("Location not found!");
         }
-        log.info("Find by id ", l);
+        log.info("Find by id ...", locationOptional.get());
         return locationOptional.get();
     }
 
     @Override
     public Location save(Location location) {
         Location savedLocation = locationRepository.save(location);
-        log.info("Saved location ", savedLocation);
+        log.info("Saved location ...", savedLocation);
         return savedLocation;
     }
 
@@ -61,7 +61,7 @@ public  class LocationServiceImpl implements  LocationService{
             throw new RuntimeException("Location not found!");
         }
         Location updateLocation = locationRepository.save(location);
-        log.info("Update location ", updateLocation);
+        log.info("Update location ...", updateLocation);
         return updateLocation;
     }
 
