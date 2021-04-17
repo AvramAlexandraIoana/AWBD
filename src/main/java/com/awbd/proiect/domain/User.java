@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -104,4 +105,8 @@ public class User extends DateAudit {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    @ManyToMany(mappedBy = "users",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Trip> tripList;
 }

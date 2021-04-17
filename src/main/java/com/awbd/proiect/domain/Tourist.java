@@ -17,9 +17,9 @@ public class Tourist {
     private Date dateOfBirth;
     private String description;
 
-    @ManyToMany(mappedBy = "tourists",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Trip> tripList;
+//    @ManyToMany(mappedBy = "tourists",
+//            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private List<Trip> tripList;
 
 
 }

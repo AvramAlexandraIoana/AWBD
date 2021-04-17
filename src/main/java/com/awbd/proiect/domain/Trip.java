@@ -30,8 +30,8 @@ public class Trip {
             joinColumns =@JoinColumn(name="trip_id",referencedColumnName =
                     "id"),
             inverseJoinColumns
-                    =@JoinColumn(name="tourist_id",referencedColumnName="id"))
-    private List<Tourist> tourists;
+                    =@JoinColumn(name="user_id",referencedColumnName="id"))
+    private List<User> users;
 
 
 }
