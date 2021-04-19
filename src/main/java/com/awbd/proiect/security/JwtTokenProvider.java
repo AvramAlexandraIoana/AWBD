@@ -1,12 +1,17 @@
 package com.awbd.proiect.security;
 
+import com.awbd.proiect.domain.Role;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
@@ -26,11 +31,17 @@ public class JwtTokenProvider {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
+        List<String> roleList = userPrincipal.getAuthorities().stream().map(role ->
+                role.getAuthority()
+        ).collect(Collectors.toList());
+
         return Jwts.builder()
-                .setSubject(Long.toString(userPrincipal.getId()))
+                .setId(userPrincipal.getId().toString())
+                .setSubject(userPrincipal.getEmail())
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .claim("roles", roleList)
                 .compact();
     }
 
@@ -40,7 +51,7 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Long.parseLong(claims.getSubject());
+        return Long.parseLong(claims.getId());
     }
 
     public boolean validateToken(String authToken) {
