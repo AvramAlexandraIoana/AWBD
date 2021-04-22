@@ -31,7 +31,7 @@ public class AgencyController {
 
     @PostMapping()
     public
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MANAGER')")
     ResponseEntity<Agency> save(@RequestBody  Agency agency) {
         Agency savedAgency = agencyService.save(agency);
         return ResponseEntity.created(UriComponentsBuilder.
@@ -45,21 +45,21 @@ public class AgencyController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MANAGER')")
     public ResponseEntity<Agency> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(agencyService.findById(id));
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MANAGER')")
     public ResponseEntity<Agency> update(@RequestBody Agency agency) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(agencyService.update(agency));
     }
 
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MANAGER')")
     public void deleteById(@PathVariable Long id) {
         agencyService.deleteById(id);
     }
