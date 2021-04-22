@@ -27,7 +27,7 @@ public class CountryController {
     }
 
     @GetMapping("/list")
-    @PreAuthorize("hasRole('ROLE_USER')  or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public
     ResponseEntity<List<Country>> get() {
         return ResponseEntity.status(HttpStatus.ACCEPTED)
