@@ -30,6 +30,7 @@ public class Location {
     private List<Agency> agencyList;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Info info;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
