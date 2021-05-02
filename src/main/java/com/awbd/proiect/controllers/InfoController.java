@@ -5,6 +5,7 @@ import com.awbd.proiect.domain.Location;
 import com.awbd.proiect.services.InfoService;
 import com.awbd.proiect.services.LocationService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,11 +29,11 @@ public class InfoController {
         this.locationService = locationService;
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/upload/{id}/{description}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void handleImagePost(@RequestParam("imageFile") MultipartFile file){
+    public void handleImagePost(@PathVariable Long id, @PathVariable String description, @RequestParam("imageFile") MultipartFile file){
 
-        infoService.saveImageFile(Long.valueOf(1), file);
+        infoService.saveImageFile(id, description, file);
     }
 
 
@@ -58,4 +59,11 @@ public class InfoController {
             }
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Info> getByLocationId(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(infoService.findByLocationId(id));
+    }
+
 }

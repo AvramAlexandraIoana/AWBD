@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class InfoServiceImpl implements  InfoService{
@@ -26,7 +27,7 @@ public class InfoServiceImpl implements  InfoService{
 
     @Override
     @Transactional
-    public void saveImageFile(Long locationId, MultipartFile file) {
+    public void saveImageFile(Long locationId, String description, MultipartFile file) {
         try {
             Location location = locationRepository.findById(locationId).get();
 
@@ -40,10 +41,25 @@ public class InfoServiceImpl implements  InfoService{
             }
 
             info.setImage(byteObjects);
+            info.setDescription(description);
             location.setInfo(info);
             info.setLocation(location);
             locationRepository.save(location); }
         catch (IOException e) {
         }
+    }
+
+    @Override
+    public Info findByLocationId(Long id) {
+        Optional<Location> locationOptional =
+                locationRepository.findById(id);
+        if (!locationOptional.isPresent()) {
+            throw new RuntimeException("Location not found!");
+        }
+        if (locationOptional.get().getInfo() == null) {
+            throw new RuntimeException("Info not found!");
+        }
+        Info info = locationOptional.get().getInfo();
+        return info;
     }
 }
