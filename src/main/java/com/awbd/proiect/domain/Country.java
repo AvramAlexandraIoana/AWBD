@@ -34,4 +34,9 @@ public class Country {
     public Country() {
 
     }
+
+    public Country(Long id, String countryName) {
+        this.id = id;
+        this.countryName = countryName;
+    }
 }

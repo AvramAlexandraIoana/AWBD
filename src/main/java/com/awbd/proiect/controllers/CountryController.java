@@ -4,6 +4,7 @@ import com.awbd.proiect.domain.Agency;
 import com.awbd.proiect.domain.Country;
 import com.awbd.proiect.domain.Location;
 import com.awbd.proiect.dto.CountryRequest;
+import com.awbd.proiect.dto.CountryUpdate;
 import com.awbd.proiect.mapper.CountryMapper;
 import com.awbd.proiect.services.AgencyService;
 import com.awbd.proiect.services.CountryService;
@@ -64,11 +65,11 @@ public class CountryController {
                 .body(countryService.findById(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Country> update(@RequestBody Country country) {
+    public ResponseEntity<Country> update(@RequestBody @Valid CountryUpdate countryUpdate) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(countryService.update(country));
+                .body(countryService.update(countryMapper.countryUpdateToCountry(countryUpdate)));
     }
 
     @DeleteMapping("/delete/{id}")

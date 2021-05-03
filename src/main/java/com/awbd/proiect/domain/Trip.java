@@ -24,13 +24,8 @@ public class Trip {
     @JoinColumn(name="location_id")
     private Location location;
 
-    @ManyToMany(
+    @ManyToMany(mappedBy = "trips",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "purchase",
-            joinColumns =@JoinColumn(name="trip_id",referencedColumnName =
-                    "id"),
-            inverseJoinColumns
-                    =@JoinColumn(name="user_id",referencedColumnName="id"))
     private List<User> users;
 
 
