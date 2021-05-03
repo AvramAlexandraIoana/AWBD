@@ -1,7 +1,9 @@
 package com.awbd.proiect.controllers;
 
-import com.awbd.proiect.domain.Country;
 import com.awbd.proiect.domain.Location;
+import com.awbd.proiect.dto.LocationRequest;
+import com.awbd.proiect.dto.LocationUpdate;
+import com.awbd.proiect.mapper.LocationMapper;
 import com.awbd.proiect.services.LocationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,8 +20,12 @@ import java.util.List;
 public class LocationController {
     private LocationService locationService;
 
-    public LocationController(LocationService locationService) {
+    private LocationMapper locationMapper;
+
+
+    public LocationController(LocationService locationService, LocationMapper locationMapper) {
         this.locationService = locationService;
+        this.locationMapper = locationMapper;
     }
 
 
@@ -33,8 +40,8 @@ public class LocationController {
     @PostMapping()
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public
-    ResponseEntity<Location> save(@RequestBody Location location) {
-        Location savedLocation = locationService.save(location);
+    ResponseEntity<Location> save(@RequestBody @Valid LocationRequest locationRequest) {
+        Location savedLocation = locationService.save(locationMapper.locationRequestToLocation(locationRequest));
         return ResponseEntity.created(UriComponentsBuilder.
                 fromHttpUrl(ServletUriComponentsBuilder.
                         fromCurrentRequestUri().
@@ -52,11 +59,11 @@ public class LocationController {
                 .body(locationService.findById(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Location> update(@RequestBody Location location) {
+    public ResponseEntity<Location> update(@RequestBody  @Valid LocationUpdate locationUpdate) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(locationService.update(location));
+                .body(locationService.update(locationMapper.locationUpdateToLocation(locationUpdate)));
     }
 
     @DeleteMapping("/delete/{id}")

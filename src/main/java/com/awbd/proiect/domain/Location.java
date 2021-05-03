@@ -36,4 +36,22 @@ public class Location {
     @JsonIgnore
     private List<Trip> tripList;
 
+    public  Location() {
+
+    }
+
+    public Location(String city, String streetAddress, Country country, Info info) {
+        this.city = city;
+        this.streetAddress = streetAddress;
+        this.country = country;
+        this.info = info;
+    }
+
+    public Location(Long id, String city, String streetAddress, Country country, Info info) {
+        this.id = id;
+        this.city = city;
+        this.streetAddress = streetAddress;
+        this.country = country;
+        this.info = info;
+    }
 }
