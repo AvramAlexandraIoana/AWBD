@@ -21,5 +21,6 @@ public class Info {
     private String description;
 
     @OneToOne
+    @JsonIgnore
     private Location location;
 }

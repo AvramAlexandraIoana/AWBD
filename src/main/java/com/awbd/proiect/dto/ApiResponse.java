@@ -1,4 +1,4 @@
-package com.awbd.proiect.payload;
+package com.awbd.proiect.dto;
 
 public class ApiResponse {
     private Boolean success;

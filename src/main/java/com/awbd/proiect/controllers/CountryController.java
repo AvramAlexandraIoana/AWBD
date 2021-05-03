@@ -3,6 +3,8 @@ package com.awbd.proiect.controllers;
 import com.awbd.proiect.domain.Agency;
 import com.awbd.proiect.domain.Country;
 import com.awbd.proiect.domain.Location;
+import com.awbd.proiect.dto.CountryRequest;
+import com.awbd.proiect.mapper.CountryMapper;
 import com.awbd.proiect.services.AgencyService;
 import com.awbd.proiect.services.CountryService;
 import com.awbd.proiect.services.CountryServiceImpl;
@@ -14,16 +16,21 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/country")
 public class CountryController {
-    private CountryService countryService;
 
-    public CountryController(CountryService countryService) {
+    private CountryService countryService;
+    private CountryMapper countryMapper;
+
+
+    public CountryController(CountryService countryService,  CountryMapper countryMapper) {
         this.countryService = countryService;
+        this.countryMapper = countryMapper;
     }
 
     @GetMapping("/list")
@@ -37,8 +44,8 @@ public class CountryController {
     @PostMapping()
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public
-    ResponseEntity<Country> save(@RequestBody Country country) {
-        Country savedCountry = countryService.save(country);
+    ResponseEntity<Country> save(@RequestBody  @Valid CountryRequest countryRequest) {
+        Country savedCountry = countryService.save(countryMapper.countryRequestToCountry(countryRequest));
         return ResponseEntity.created(UriComponentsBuilder.
                 fromHttpUrl(ServletUriComponentsBuilder.
                         fromCurrentRequestUri().

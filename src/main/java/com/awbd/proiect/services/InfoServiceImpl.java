@@ -3,6 +3,7 @@ package com.awbd.proiect.services;
 import com.awbd.proiect.domain.Info;
 import com.awbd.proiect.domain.Location;
 import com.awbd.proiect.repositories.LocationRepository;
+import com.awbd.proiect.utils.ObjectNotFoundException;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,10 +55,10 @@ public class InfoServiceImpl implements  InfoService{
         Optional<Location> locationOptional =
                 locationRepository.findById(id);
         if (!locationOptional.isPresent()) {
-            throw new RuntimeException("Location not found!");
+            throw new ObjectNotFoundException("Location not found!");
         }
         if (locationOptional.get().getInfo() == null) {
-            throw new RuntimeException("Info not found!");
+            throw new ObjectNotFoundException("Info not found!");
         }
         Info info = locationOptional.get().getInfo();
         return info;
