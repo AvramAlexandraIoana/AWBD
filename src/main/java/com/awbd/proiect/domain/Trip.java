@@ -3,6 +3,7 @@ package com.awbd.proiect.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,9 +12,12 @@ public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private Double price;
     private int numberOfSpots;
+    private Date startDate;
+    private Date endDate;
 
     @ManyToOne
     @JoinColumn(name="agency_id")
