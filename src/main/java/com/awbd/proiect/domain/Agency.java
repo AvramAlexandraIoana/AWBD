@@ -2,13 +2,18 @@ package com.awbd.proiect.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 public class Agency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +28,18 @@ public class Agency {
     @JsonIgnore
     private List<Trip> tripList;
 
+    public Agency() {
+
+    }
+
+    public Agency(String name, Location location) {
+        this.name = name;
+        this.location = location;
+    }
+
+    public Agency(Long id, String name, Location location) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+    }
 }

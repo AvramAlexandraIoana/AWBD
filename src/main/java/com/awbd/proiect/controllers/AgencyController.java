@@ -1,7 +1,9 @@
 package com.awbd.proiect.controllers;
 
 import com.awbd.proiect.domain.Agency;
-import com.awbd.proiect.domain.Country;
+import com.awbd.proiect.dto.AgencyRequest;
+import com.awbd.proiect.dto.AgencyUpdate;
+import com.awbd.proiect.mapper.AgencyMapper;
 import com.awbd.proiect.services.AgencyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,8 +20,12 @@ import java.util.List;
 public class AgencyController {
     private AgencyService agencyService;
 
-    public AgencyController(AgencyService agencyService) {
+    private AgencyMapper agencyMapper;
+
+
+    public AgencyController(AgencyService agencyService, AgencyMapper agencyMapper) {
         this.agencyService = agencyService;
+        this.agencyMapper = agencyMapper;
     }
 
 
@@ -32,8 +39,8 @@ public class AgencyController {
     @PostMapping()
     public
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MANAGER')")
-    ResponseEntity<Agency> save(@RequestBody  Agency agency) {
-        Agency savedAgency = agencyService.save(agency);
+    ResponseEntity<Agency> save(@RequestBody   @Valid AgencyRequest agencyRequest) {
+        Agency savedAgency = agencyService.save(agencyMapper.agencyRequestToAgency(agencyRequest));
         return ResponseEntity.created(UriComponentsBuilder.
                 fromHttpUrl(ServletUriComponentsBuilder.
                         fromCurrentRequestUri().
@@ -51,11 +58,11 @@ public class AgencyController {
                 .body(agencyService.findById(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MANAGER')")
-    public ResponseEntity<Agency> update(@RequestBody Agency agency) {
+    public ResponseEntity<Agency> update(@RequestBody  @Valid AgencyUpdate agencyUpdate) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(agencyService.update(agency));
+                .body(agencyService.update(agencyMapper.agencyUpdateToAgency(agencyUpdate)));
     }
 
     @DeleteMapping("/delete/{id}")
