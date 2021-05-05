@@ -1,13 +1,18 @@
 package com.awbd.proiect.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +20,8 @@ public class Trip {
 
     private String name;
     private Double price;
-    private int numberOfSpots;
+    private int numberOfSeats;
+    private int duration;
     private Date startDate;
     private Date endDate;
 
@@ -32,5 +38,29 @@ public class Trip {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<User> users;
 
+    public Trip() {
+    }
 
+    public Trip(String name, int numberOfSeats, Double price, int duration, Date startDate, Date endDate, Location location, Agency agency) {
+        this.name = name;
+        this.numberOfSeats = numberOfSeats;
+        this.price = price;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.agency = agency;
+    }
+
+    public Trip(Long id, String name, int numberOfSeats, Double price, int duration, Date startDate, Date endDate, Location location, Agency agency) {
+        this.id = id;
+        this.name = name;
+        this.numberOfSeats = numberOfSeats;
+        this.price = price;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.agency = agency;
+    }
 }
