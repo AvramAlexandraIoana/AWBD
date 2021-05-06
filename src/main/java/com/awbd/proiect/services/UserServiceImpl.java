@@ -1,6 +1,7 @@
 package com.awbd.proiect.services;
 
 
+import com.awbd.proiect.domain.Location;
 import com.awbd.proiect.domain.Trip;
 import com.awbd.proiect.domain.User;
 import com.awbd.proiect.repositories.UserRepository;
@@ -56,5 +57,19 @@ public class UserServiceImpl implements  UserService{
         userRepository.deleteById(id);
 
     }
+
+    @Override
+    public User update(Long id, List<Trip> trips) {
+        Optional<User> userOptional =
+                userRepository.findById(id);
+        if (!userOptional.isPresent()) {
+            throw new RuntimeException("User not found!");
+        }
+        User user = userOptional.get();
+        user.setTrips(trips);
+        User updateUser = userRepository.save(user);
+        return updateUser;
+    }
+
 
 }

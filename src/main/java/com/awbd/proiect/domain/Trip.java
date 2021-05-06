@@ -1,5 +1,6 @@
 package com.awbd.proiect.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +37,7 @@ public class Trip {
 
     @ManyToMany(mappedBy = "trips",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
     private List<User> users;
 
     public Trip() {
