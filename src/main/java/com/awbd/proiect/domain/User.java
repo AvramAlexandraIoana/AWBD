@@ -55,7 +55,7 @@ public class User extends DateAudit {
                     =@JoinColumn(name="trip_id",referencedColumnName="id"))
     private List<Trip> trips;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

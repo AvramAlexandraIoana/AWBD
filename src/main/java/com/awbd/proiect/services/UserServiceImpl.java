@@ -2,6 +2,7 @@ package com.awbd.proiect.services;
 
 
 import com.awbd.proiect.domain.Location;
+import com.awbd.proiect.domain.Role;
 import com.awbd.proiect.domain.Trip;
 import com.awbd.proiect.domain.User;
 import com.awbd.proiect.repositories.UserRepository;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements  UserService{
@@ -70,6 +73,21 @@ public class UserServiceImpl implements  UserService{
         User updateUser = userRepository.save(user);
         return updateUser;
     }
+
+    @Override
+    public User updateRoles(Long id, List<Role> roles) {
+        Optional<User> userOptional =
+                userRepository.findById(id);
+        if (!userOptional.isPresent()) {
+            throw new RuntimeException("User not found!");
+        }
+        User user = userOptional.get();
+        Set<Role> rolesSet = roles.stream().collect(Collectors.toSet());
+        user.setRoles(rolesSet);
+        User updateUser = userRepository.save(user);
+        return updateUser;
+    }
+
 
 
 }

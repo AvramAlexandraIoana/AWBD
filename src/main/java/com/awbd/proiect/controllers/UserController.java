@@ -1,12 +1,11 @@
 package com.awbd.proiect.controllers;
 
-import com.awbd.proiect.domain.Country;
-import com.awbd.proiect.domain.Location;
-import com.awbd.proiect.domain.Trip;
-import com.awbd.proiect.domain.User;
+import com.awbd.proiect.domain.*;
 import com.awbd.proiect.dto.TripRequest;
+import com.awbd.proiect.dto.UserRolesRequest;
 import com.awbd.proiect.dto.UserTripRequest;
 import com.awbd.proiect.services.LocationService;
+import com.awbd.proiect.services.RoleService;
 import com.awbd.proiect.services.TripService;
 import com.awbd.proiect.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -23,11 +22,14 @@ import java.util.stream.Collectors;
 public class UserController {
     private UserService userService;
     private TripService tripService;
+    private RoleService roleService;
 
 
-    public UserController(UserService userService, TripService tripService) {
+
+    public UserController(UserService userService, TripService tripService, RoleService roleService) {
         this.userService = userService;
         this.tripService = tripService;
+        this.roleService = roleService;
     }
 
 
@@ -67,6 +69,23 @@ public class UserController {
         }
         return tripsIds.stream().map(tripService::findById).collect(Collectors.toList());
     }
+
+    @PutMapping("/roles/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<User> updateRoles(@PathVariable Long id, @RequestBody @Valid UserRolesRequest userRolesRequest) {
+        List<Role> roles = findRoles(userRolesRequest.getRoleIds());
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userService.updateRoles(id, roles));
+    }
+
+    private List<Role> findRoles(List<Long> roleIds) {
+        if (roleIds == null || roleIds.isEmpty()) {
+            return null;
+        }
+        return roleIds.stream().map(roleService::findById).collect(Collectors.toList());
+    }
+
 
 
 }
