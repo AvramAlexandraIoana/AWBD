@@ -77,7 +77,7 @@ public class LocationController {
     @GetMapping("/page/{currentPage}")
     @PreAuthorize("hasRole('ROLE_USER')")
     public List<Location> findPage(@PathVariable int currentPage){
-        int pageLimit = 3;
+        int pageLimit = 4;
         Page<Location> page = locationService.findPage(currentPage, pageLimit);
         List<Location> locations = page.getContent();
 
