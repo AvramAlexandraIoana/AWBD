@@ -1,11 +1,16 @@
 package com.awbd.proiect.services;
 
+import com.awbd.proiect.domain.Location;
 import com.awbd.proiect.domain.Trip;
 import com.awbd.proiect.repositories.TripRepository;
 import com.awbd.proiect.utils.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -67,6 +72,13 @@ public class TripServiceImpl implements TripService {
     public void deleteById(Long id) {
         logger.info("S-a sters excursia cu id-ul " + id);
         tripRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Trip> findPageSortingByPriceDescending(int currentPage, int pageLimit){
+        Pageable pageable = PageRequest.of(currentPage - 1, pageLimit, Sort.by("price").descending());
+        return tripRepository.findAll(pageable);
+
     }
 
 
