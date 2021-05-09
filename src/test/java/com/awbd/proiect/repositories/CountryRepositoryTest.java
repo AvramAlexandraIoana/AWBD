@@ -62,13 +62,9 @@ public class CountryRepositoryTest {
     }
 
 
-
-
-
-
     @Test
     public void deleteCountry() {
-        int id  = 3;
+        int id  = 9;
         long id1 = id;
         countryRepository.deleteById(id1);
     }
