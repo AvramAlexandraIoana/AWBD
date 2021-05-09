@@ -84,6 +84,9 @@ public  class LocationServiceImpl implements  LocationService{
 
     @Override
     public List<Location> findByCity(String city){
+        if (city.equals("null") || city.isEmpty()) {
+            return this.findAll();
+        }
         List<Location> locations = new LinkedList<>();
         locationRepository.findByCity(city.toLowerCase()).iterator().forEachRemaining(locations::add);
         logger.info("S-au preluat locatiile cu city egal cu  " + city + " {}", locations);
