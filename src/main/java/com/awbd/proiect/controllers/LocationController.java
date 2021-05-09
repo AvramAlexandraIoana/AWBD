@@ -5,6 +5,7 @@ import com.awbd.proiect.dto.LocationRequest;
 import com.awbd.proiect.dto.LocationUpdate;
 import com.awbd.proiect.mapper.LocationMapper;
 import com.awbd.proiect.services.LocationService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -71,4 +72,17 @@ public class LocationController {
     public void deleteById(@PathVariable Long id) {
         locationService.deleteById(id);
     }
+
+
+    @GetMapping("/page/{currentPage}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public List<Location> findPage(@PathVariable int currentPage){
+        int pageLimit = 3;
+        Page<Location> page = locationService.findPage(currentPage, pageLimit);
+        List<Location> locations = page.getContent();
+
+        return locations;
+
+    }
+
 }

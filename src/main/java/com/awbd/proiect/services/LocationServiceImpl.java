@@ -1,13 +1,14 @@
 package com.awbd.proiect.services;
 
-import com.awbd.proiect.domain.Country;
 import com.awbd.proiect.domain.Location;
-import com.awbd.proiect.repositories.CountryRepository;
 import com.awbd.proiect.repositories.LocationRepository;
 import com.awbd.proiect.utils.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -70,6 +71,13 @@ public  class LocationServiceImpl implements  LocationService{
     public void deleteById(Long id) {
         logger.info("S-a sters locatia cu " + id);
         locationRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Location> findPage(int currentPage, int pageLimit){
+        Pageable pageable = PageRequest.of(currentPage - 1, pageLimit);
+        return locationRepository.findAll(pageable);
+
     }
 
 
