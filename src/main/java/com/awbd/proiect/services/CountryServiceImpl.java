@@ -4,6 +4,7 @@ import com.awbd.proiect.domain.Agency;
 import com.awbd.proiect.domain.Country;
 import com.awbd.proiect.repositories.AgencyRepository;
 import com.awbd.proiect.repositories.CountryRepository;
+import com.awbd.proiect.utils.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ import java.util.Optional;
 @Service
 public class CountryServiceImpl  implements  CountryService{
 
-    private final Logger log = LoggerFactory.getLogger(CountryServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CountryServiceImpl.class);
 
     CountryRepository countryRepository;
+
     @Autowired
     public CountryServiceImpl(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
@@ -29,7 +31,7 @@ public class CountryServiceImpl  implements  CountryService{
     List<Country> findAll(){
         List<Country> countryList = new LinkedList<>();
         countryRepository.findAll().iterator().forEachRemaining(countryList::add);
-        log.info("Find all countries ...", countryList);
+        logger.info("S-au preluat tarile {}", countryList);
         return countryList;
     }
 
@@ -38,16 +40,16 @@ public class CountryServiceImpl  implements  CountryService{
         Optional<Country> productOptional =
                 countryRepository.findById(l);
         if (!productOptional.isPresent()) {
-            throw new RuntimeException("Country not found!");
+            throw new ObjectNotFoundException("Tara nu a fost gasita!");
         }
-        log.info("Find by id ...", productOptional.get());
+        logger.info("S-a preluat tara cu id-ul " + l + " {}", productOptional.get());
         return productOptional.get();
     }
 
     @Override
     public Country save(Country country) {
         Country savedCountry = countryRepository.save(country);
-        log.info("Saved country ...", savedCountry);
+        logger.info("S-a adaugat tara {}", savedCountry);
         return savedCountry;
     }
 
@@ -56,16 +58,16 @@ public class CountryServiceImpl  implements  CountryService{
         Optional<Country> productOptional =
                 countryRepository.findById(country.getId());
         if (!productOptional.isPresent()) {
-            throw new RuntimeException("Country not found!");
+            throw new ObjectNotFoundException("Tara nu a fost gasita!");
         }
-        Country updateCountry = countryRepository.save(country);
-        log.info("Update country ...", updateCountry);
-        return updateCountry;
+        Country updatedCountry = countryRepository.save(country);
+        logger.info("S-a updatat tara cu id-ul " +  updatedCountry.getId() + " {}", updatedCountry);
+        return updatedCountry;
     }
 
     @Override
     public void deleteById(Long id) {
-        log.info("Delete by id ", id);
+        logger.info("S-a sters tara cu id-ul "  + id);
         countryRepository.deleteById(id);
     }
 

@@ -2,6 +2,7 @@ package com.awbd.proiect.domain;
 import com.awbd.proiect.domain.audit.DateAudit;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -23,6 +24,7 @@ import java.util.Set;
 })
 @Getter
 @Setter
+@ToString
 public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,12 +55,14 @@ public class User extends DateAudit {
                     "id"),
             inverseJoinColumns
                     =@JoinColumn(name="trip_id",referencedColumnName="id"))
+    @ToString.Exclude
     private List<Trip> trips;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ToString.Exclude
     private Set<Role> roles = new HashSet<>();
 
 
@@ -77,7 +81,6 @@ public class User extends DateAudit {
         trip.getUsers().remove(this);
         trips.remove(trip);
     }
-
 
 
 }

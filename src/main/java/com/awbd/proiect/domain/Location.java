@@ -2,10 +2,7 @@ package com.awbd.proiect.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,13 +26,16 @@ public class Location {
 
     @OneToMany(mappedBy = "location",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
+    @ToString.Exclude
     private List<Agency> agencyList;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private Info info;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
+    @ToString.Exclude
     private List<Trip> tripList;
 
     public  Location() {
@@ -56,4 +56,5 @@ public class Location {
         this.country = country;
         this.info = info;
     }
+
 }

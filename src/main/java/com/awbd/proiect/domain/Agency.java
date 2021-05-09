@@ -1,10 +1,7 @@
 package com.awbd.proiect.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +23,7 @@ public class Agency {
 
     @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
+    @ToString.Exclude
     private List<Trip> tripList;
 
     public Agency() {
@@ -42,4 +40,5 @@ public class Agency {
         this.name = name;
         this.location = location;
     }
+
 }

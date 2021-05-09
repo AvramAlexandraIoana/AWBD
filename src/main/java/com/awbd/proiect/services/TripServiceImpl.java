@@ -2,6 +2,7 @@ package com.awbd.proiect.services;
 
 import com.awbd.proiect.domain.Trip;
 import com.awbd.proiect.repositories.TripRepository;
+import com.awbd.proiect.utils.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 @Service
 public class TripServiceImpl implements TripService {
-    private final Logger log = LoggerFactory.getLogger(TripServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(TripServiceImpl.class);
 
     TripRepository tripRepository;
 
@@ -27,7 +28,7 @@ public class TripServiceImpl implements TripService {
     List<Trip> findAll(){
         List<Trip> trips = new LinkedList<>();
         tripRepository.findAll().iterator().forEachRemaining(trips::add);
-        log.info("Find all trips ...", trips);
+        logger.info("S-au preluat  excursiile {}", trips);
         return trips;
     }
 
@@ -36,16 +37,16 @@ public class TripServiceImpl implements TripService {
         Optional<Trip> tripOptional =
                 tripRepository.findById(l);
         if (!tripOptional.isPresent()) {
-            throw new RuntimeException("Trip not found!");
+            throw new ObjectNotFoundException("Excursia nu a fost gasita!");
         }
-        log.info("Find by id ...", tripOptional.get());
+        logger.info("S-a preluat excursia cu id-ul " + l + " {} ", tripOptional.get());
         return tripOptional.get();
     }
 
     @Override
     public Trip save(Trip trip) {
         Trip savedTrip = tripRepository.save(trip);
-        log.info("Saved trip ...", savedTrip);
+        logger.info("S-a adaugat excursia {}", savedTrip);
         return savedTrip;
     }
 
@@ -55,16 +56,16 @@ public class TripServiceImpl implements TripService {
         Optional<Trip> tripOptional =
                 tripRepository.findById(trip.getId());
         if (!tripOptional.isPresent()) {
-            throw new RuntimeException("Trip not found!");
+            throw new ObjectNotFoundException("Excursia nu a fost gasita!");
         }
-        Trip updateTrip = tripRepository.save(trip);
-        log.info("Update trip ...", updateTrip);
-        return updateTrip;
+        Trip updatedTrip = tripRepository.save(trip);
+        logger.info("S-a updatat excursia cu id-ul " + updatedTrip.getId() + " {}", updatedTrip );
+        return updatedTrip;
     }
 
     @Override
     public void deleteById(Long id) {
-        log.info("Delete by id ", id);
+        logger.info("S-a sters excursia cu id-ul " + id);
         tripRepository.deleteById(id);
     }
 

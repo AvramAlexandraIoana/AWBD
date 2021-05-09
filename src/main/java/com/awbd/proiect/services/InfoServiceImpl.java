@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 public class InfoServiceImpl implements  InfoService{
-    private final Logger log = LoggerFactory.getLogger(InfoServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(InfoServiceImpl.class);
 
     LocationRepository locationRepository;
 
@@ -45,7 +45,9 @@ public class InfoServiceImpl implements  InfoService{
             info.setDescription(description);
             location.setInfo(info);
             info.setLocation(location);
-            locationRepository.save(location); }
+            locationRepository.save(location);
+            logger.info("S-a adaugat informatia pentru locatia  cu id-ul " + locationId + " {} ", info);
+        }
         catch (IOException e) {
         }
     }
@@ -55,12 +57,13 @@ public class InfoServiceImpl implements  InfoService{
         Optional<Location> locationOptional =
                 locationRepository.findById(id);
         if (!locationOptional.isPresent()) {
-            throw new ObjectNotFoundException("Location not found!");
+            throw new ObjectNotFoundException("Locatia nu a fost gasita!");
         }
         if (locationOptional.get().getInfo() == null) {
-            throw new ObjectNotFoundException("Info not found!");
+            throw new ObjectNotFoundException("Informatia nu a fost gasita!");
         }
         Info info = locationOptional.get().getInfo();
+        logger.info("S-a preluat informatia pentru locatia cu id-ul " + id + " {} ", info);
         return info;
     }
 }

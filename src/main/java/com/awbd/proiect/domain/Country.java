@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +23,7 @@ public class Country {
     @OneToMany(mappedBy = "country",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JsonManagedReference
     @JsonIgnore
+    @ToString.Exclude
     private List<Location> locationList;
 
 
@@ -41,4 +39,5 @@ public class Country {
         this.id = id;
         this.countryName = countryName;
     }
+
 }

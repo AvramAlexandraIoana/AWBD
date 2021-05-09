@@ -4,6 +4,7 @@ import com.awbd.proiect.domain.Country;
 import com.awbd.proiect.domain.Location;
 import com.awbd.proiect.repositories.CountryRepository;
 import com.awbd.proiect.repositories.LocationRepository;
+import com.awbd.proiect.utils.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.Optional;
 @Service
 public  class LocationServiceImpl implements  LocationService{
 
-    private final Logger log = LoggerFactory.getLogger(LocationServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(LocationServiceImpl.class);
 
     LocationRepository locationRepository;
 
@@ -30,7 +31,7 @@ public  class LocationServiceImpl implements  LocationService{
     List<Location> findAll(){
         List<Location> locations = new LinkedList<>();
         locationRepository.findAll().iterator().forEachRemaining(locations::add);
-        log.info("Find all locations ...", locations);
+        logger.info("S-au preluat  locatiile {}", locations);
         return locations;
     }
 
@@ -39,16 +40,16 @@ public  class LocationServiceImpl implements  LocationService{
         Optional<Location> locationOptional =
                 locationRepository.findById(l);
         if (!locationOptional.isPresent()) {
-            throw new RuntimeException("Location not found!");
+            throw new ObjectNotFoundException("Locatia nu a fost gasita!");
         }
-        log.info("Find by id ...", locationOptional.get());
+        logger.info("S-a preluat locatia cu id-ul " + l + " {}", locationOptional.get());
         return locationOptional.get();
     }
 
     @Override
     public Location save(Location location) {
         Location savedLocation = locationRepository.save(location);
-        log.info("Saved location ...", savedLocation);
+        logger.info("S-a adaugat locatia {}", savedLocation);
         return savedLocation;
     }
 
@@ -58,16 +59,16 @@ public  class LocationServiceImpl implements  LocationService{
         Optional<Location> locationOptional =
                 locationRepository.findById(location.getId());
         if (!locationOptional.isPresent()) {
-            throw new RuntimeException("Location not found!");
+            throw new ObjectNotFoundException("Locatia nu a fost gasita!");
         }
-        Location updateLocation = locationRepository.save(location);
-        log.info("Update location ...", updateLocation);
-        return updateLocation;
+        Location updatedLocation = locationRepository.save(location);
+        logger.info("S-a updatat locatia {}", updatedLocation);
+        return updatedLocation;
     }
 
     @Override
     public void deleteById(Long id) {
-        log.info("Delete by id ", id);
+        logger.info("S-a sters locatia cu " + id);
         locationRepository.deleteById(id);
     }
 

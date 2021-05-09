@@ -4,6 +4,7 @@ import com.awbd.proiect.domain.Location;
 import com.awbd.proiect.domain.Role;
 import com.awbd.proiect.repositories.LocationRepository;
 import com.awbd.proiect.repositories.RoleRepository;
+import com.awbd.proiect.utils.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 @Service
 public class RoleServiceImpl implements  RoleService{
-    private final Logger log = LoggerFactory.getLogger(RoleServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
 
     RoleRepository roleRepository;
 
@@ -28,7 +29,7 @@ public class RoleServiceImpl implements  RoleService{
     public List<Role> findAll(){
         List<Role> roles = new LinkedList<>();
         roleRepository.findAll().iterator().forEachRemaining(roles::add);
-        log.info("Find all roles ...", roles);
+        logger.info("S-au preluat  rolurile {}", roles);
         return roles;
     }
 
@@ -37,9 +38,9 @@ public class RoleServiceImpl implements  RoleService{
         Optional<Role> roleOptional =
                 roleRepository.findById(l);
         if (!roleOptional.isPresent()) {
-            throw new RuntimeException("Role not found!");
+            throw new ObjectNotFoundException("Rolul nu a fost gasit!");
         }
-        log.info("Find by id ...", roleOptional.get());
+        logger.info("S-a preluat rolul cu id-ul " + l + " {} ", roleOptional.get());
         return roleOptional.get();
     }
 }

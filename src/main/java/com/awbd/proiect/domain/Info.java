@@ -1,10 +1,7 @@
 package com.awbd.proiect.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -19,6 +16,7 @@ public class Info {
 
     @Lob
     @JsonIgnore
+    @ToString.Exclude
     private Byte[] image;
     private String description;
 

@@ -1,10 +1,7 @@
 package com.awbd.proiect.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -38,6 +35,7 @@ public class Trip {
     @ManyToMany(mappedBy = "trips",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
+    @ToString.Exclude
     private List<User> users;
 
     public Trip() {
@@ -65,4 +63,5 @@ public class Trip {
         this.location = location;
         this.agency = agency;
     }
+
 }
