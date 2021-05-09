@@ -1,6 +1,7 @@
 package com.awbd.proiect.controllers;
 
 import com.awbd.proiect.domain.Agency;
+import com.awbd.proiect.domain.Location;
 import com.awbd.proiect.dto.AgencyRequest;
 import com.awbd.proiect.dto.AgencyUpdate;
 import com.awbd.proiect.mapper.AgencyMapper;
@@ -69,6 +70,13 @@ public class AgencyController {
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MANAGER')")
     public void deleteById(@PathVariable Long id) {
         agencyService.deleteById(id);
+    }
+
+    @GetMapping("/findByLocation")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<List<Agency>> findByLocation(@RequestParam Long locationId) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(agencyService.findByLocation(locationId));
     }
 
 

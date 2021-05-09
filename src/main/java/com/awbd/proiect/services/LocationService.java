@@ -13,5 +13,7 @@ public interface LocationService {
     Location update(Location location);
     void deleteById(Long id);
     Page<Location> findPage(int currentPage, int pageLimit);
+    List<Location> findByCity(String city);
+    List<Location> findByCountry(Long countryId);
 
 }

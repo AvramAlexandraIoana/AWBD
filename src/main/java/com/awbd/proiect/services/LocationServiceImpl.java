@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -80,6 +81,24 @@ public  class LocationServiceImpl implements  LocationService{
         return locationRepository.findAll(pageable);
 
     }
+
+    @Override
+    public List<Location> findByCity(String city){
+        List<Location> locations = new LinkedList<>();
+        locationRepository.findByCity(city.toLowerCase()).iterator().forEachRemaining(locations::add);
+        logger.info("S-au preluat locatiile cu city egal cu  " + city + " {}", locations);
+        return locations;
+    }
+
+    @Override
+    public List<Location> findByCountry(Long countryId){
+        List<Location> locations = new LinkedList<>();
+        locationRepository.findByCountry(countryId).iterator().forEachRemaining(locations::add);
+        logger.info("S-au preluat locatiile cu countryId egal cu  " + countryId + " {}", locations);
+        return locations;
+    }
+
+
 
 
 

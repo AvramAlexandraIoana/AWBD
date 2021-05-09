@@ -85,4 +85,18 @@ public class LocationController {
 
     }
 
+    @GetMapping("/findByCity")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<List<Location>> findByCity(@RequestParam String city) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(locationService.findByCity(city));
+    }
+
+    @GetMapping("/findByCountry")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<List<Location>> findByCountry(@RequestParam Long countryId) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(locationService.findByCountry(countryId));
+    }
+
 }

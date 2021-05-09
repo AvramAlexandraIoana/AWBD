@@ -11,5 +11,6 @@ public interface AgencyService {
     Agency save(Agency agency);
     Agency update(Agency agency);
     void deleteById(Long id);
+    List<Agency> findByLocation(Long locationId);
 
 }

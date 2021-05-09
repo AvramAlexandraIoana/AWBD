@@ -68,6 +68,13 @@ public class AgencyServiceImpl implements AgencyService {
         agencyRepository.deleteById(id);
     }
 
+    @Override
+    public List<Agency> findByLocation(Long locationId){
+        List<Agency> agencyList = agencyRepository.findByLocation(locationId);
+        logger.info("S-au preluat agentiile cu locationId egal cu  " + locationId + " {}", agencyList);
+        return agencyList;
+    }
+
 
 
 
