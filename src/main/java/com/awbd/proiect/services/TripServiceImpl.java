@@ -77,6 +77,7 @@ public class TripServiceImpl implements TripService {
     @Override
     public Page<Trip> findPageSortingByPriceDescending(int currentPage, int pageLimit){
         Pageable pageable = PageRequest.of(currentPage - 1, pageLimit, Sort.by("price").descending());
+        logger.info("S-au sortat  excursiile descrescator dupa pret {}", tripRepository.findAll(pageable).getContent());
         return tripRepository.findAll(pageable);
 
     }

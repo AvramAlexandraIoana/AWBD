@@ -76,6 +76,7 @@ public  class LocationServiceImpl implements  LocationService{
     @Override
     public Page<Location> findPage(int currentPage, int pageLimit){
         Pageable pageable = PageRequest.of(currentPage - 1, pageLimit);
+        logger.info("S-a preluat locatiile din pagina " + currentPage + " {}", locationRepository.findAll(pageable).getContent());
         return locationRepository.findAll(pageable);
 
     }
