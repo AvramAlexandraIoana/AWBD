@@ -23,4 +23,7 @@ public class Info {
     @OneToOne
     @JsonIgnore
     private Location location;
+
+
+
 }
