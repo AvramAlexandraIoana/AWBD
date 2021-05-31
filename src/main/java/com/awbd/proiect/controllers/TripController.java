@@ -57,7 +57,7 @@ public class TripController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MANAGER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MANAGER')  || hasRole('ROLE_USER')")
     public ResponseEntity<Trip> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(tripService.findById(id));

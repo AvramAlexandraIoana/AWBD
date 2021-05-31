@@ -69,7 +69,7 @@ public class CountryControllerIT {
         //act + assert
         mockMvc.perform(post("/api/country")
                 .contentType("application/json")
-                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQ")
+                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjE4ODU5MDcsImV4cCI6MTYyMjQ5MDcwNywicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdfQ.SO_ANzAVzOfiPSGWK6u7mFDQHrNFPUaPlQOOWc6eVKuzD88BKPnSJZ2ztFIY5DGJhwFIcqEsr8zieyVuI5wJIw")
                 .content(objectMapper.writeValueAsString(countryRequest)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.countryName").value(countryRequest.getCountryName()));
@@ -88,7 +88,7 @@ public class CountryControllerIT {
         //act + assert
         mockMvc.perform(get("/api/country/list")
                 .contentType("application/json")
-                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQ")
+                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQBearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjE4ODU5MDcsImV4cCI6MTYyMjQ5MDcwNywicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdfQ.SO_ANzAVzOfiPSGWK6u7mFDQHrNFPUaPlQOOWc6eVKuzD88BKPnSJZ2ztFIY5DGJhwFIcqEsr8zieyVuI5wJIw")
                 .content(objectMapper.writeValueAsString(Arrays.asList(new Country(1L, "S.U.A")))))
                 .andExpect(status().isAccepted())
                 .andExpect(jsonPath("$[0].countryName").value(country.getCountryName()));
@@ -100,7 +100,7 @@ public class CountryControllerIT {
         //act + assert
         mockMvc.perform(get("/api/country/1")
                 .contentType("application/json")
-                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQ"))
+                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjE4ODU5MDcsImV4cCI6MTYyMjQ5MDcwNywicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdfQ.SO_ANzAVzOfiPSGWK6u7mFDQHrNFPUaPlQOOWc6eVKuzD88BKPnSJZ2ztFIY5DGJhwFIcqEsr8zieyVuI5wJIw"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.countryName").value("S.U.A"));
     }
@@ -114,7 +114,7 @@ public class CountryControllerIT {
         //act + assert
         mockMvc.perform(put("/api/country/update")
                 .contentType("application/json")
-                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQ")
+                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjE4ODU5MDcsImV4cCI6MTYyMjQ5MDcwNywicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdfQ.SO_ANzAVzOfiPSGWK6u7mFDQHrNFPUaPlQOOWc6eVKuzD88BKPnSJZ2ztFIY5DGJhwFIcqEsr8zieyVuI5wJIw")
                 .content(objectMapper.writeValueAsString(countryUpdate)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.countryName").value(countryUpdate.getCountryName()));
@@ -125,9 +125,9 @@ public class CountryControllerIT {
     public void deleteCountryHappyFlow() throws Exception {
 
         //act + assert
-        mockMvc.perform(delete("/api/country/delete/18")
+        mockMvc.perform(delete("/api/country/delete/1")
                 .contentType("application/json")
-                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjAzODIxOTgsImV4cCI6MTYyMDk4Njk5OCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdfQ.Dk0Dk_6XHCZgQcSujEGOxU11dseFEAaaeA-ijHIc1QCxpXPF8OBgfjtCzTS0tmKCtyzrkoLxCWRFKdh5naLnNQ"))
+                .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiaW9hbmEtYWxleGFuZHJhLmF2cmFtQG15LmZtaS51bmlidWMucm8iLCJpYXQiOjE2MjE4ODU5MDcsImV4cCI6MTYyMjQ5MDcwNywicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdfQ.SO_ANzAVzOfiPSGWK6u7mFDQHrNFPUaPlQOOWc6eVKuzD88BKPnSJZ2ztFIY5DGJhwFIcqEsr8zieyVuI5wJIw"))
                 .andExpect(status().isOk());
     }
 
